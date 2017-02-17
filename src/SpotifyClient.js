@@ -1,4 +1,4 @@
-'use babel';
+'use es6';
 
 import osascript from 'node-osascript';
 
