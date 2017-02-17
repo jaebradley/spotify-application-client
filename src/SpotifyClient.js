@@ -99,7 +99,7 @@ export default class SpotifyClient {
         if (!err) {
           resolve(result);
         } else {
-          reject({ reason: 'Unable to execute command' });
+          reject({ reason: `Unable to execute command: ${command}` });
         }
       });
     });
