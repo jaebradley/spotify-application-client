@@ -92,11 +92,11 @@ export default class SpotifyApplicationClient {
     return CommandExecutor.execute(SpotifyCommands.PAUSE);
   }
 
-  static goToNextTrack() {
-    return CommandExecutor.execute(SpotifyCommands.GO_TO_NEXT_TRACK);
+  static playNextTrack() {
+    return CommandExecutor.execute(SpotifyCommands.PLAY_NEXT_TRACK);
   }
 
-  static goToPreviousTrack() {
-    return CommandExecutor.execute(SpotifyCommands.GO_TO_PREVIOUS_TRACK);
+  static playPreviousTrack() {
+    return CommandExecutor.execute(SpotifyCommands.PLAY_PREVIOUS_TRACK);
   }
 }
