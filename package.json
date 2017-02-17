@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/jaebradley/spotify-application-client/issues"
   },
-  "homepage": "https://github.com/jaebradley/spotify-application-client#readme"
+  "homepage": "https://github.com/jaebradley/spotify-application-client#readme",
+  "dependencies": {
+    "node-osascript": "^1.0.4"
+  }
 }
