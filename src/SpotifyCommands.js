@@ -1,5 +1,6 @@
 'use es6';
 
+// From Spotify.sdef file
 export const GET_SONG  = 'tell application "Spotify" to name of current track';
 export const GET_ALBUM = 'tell application "Spotify" to album of current track';
 export const GET_ALBUM_ARTWORK_URL = 'tell application "Spotify" to artwork url of current track';
