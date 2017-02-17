@@ -18,3 +18,5 @@ export const IS_SPOTIFY_RUNNING = 'application "Spotify" is running';
 export const GO_TO_NEXT_TRACK = 'tell application "Spotify" to next track';
 export const GO_TO_PREVIOUS_TRACK = 'tell application "Spotify" to previous track';
 export const TOGGLE_PLAY_PAUSE = 'tell application "Spotify" to playpause';
+export const PLAY = 'tell application "Spotify" to play';
+export const PAUSE = 'tell application "Spotify" to pause';
