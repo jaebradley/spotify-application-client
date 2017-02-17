@@ -31,8 +31,8 @@ export default class SpotifyClient {
     return SpotifyClient.executeCommand(SpotifyCommands.GET_PLAYER_POSITION_IN_SECONDS);
   }
 
-  static getSongDurationInSeconds() {
-    return SpotifyClient.executeCommand(SpotifyCommands.GET_SONG_DURATION_IN_SECONDS);
+  static getTrackDurationInSeconds() {
+    return SpotifyClient.executeCommand(SpotifyCommands.GET_TRACK_DURATION_IN_SECONDS);
   }
 
   static turnOffRepeat() {
