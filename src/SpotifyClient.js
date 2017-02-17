@@ -75,14 +75,21 @@ export default class SpotifyClient {
                         .then(isShuffling => {
                           if (isShuffling) {
                             return SpotifyClient.turnOffShuffle();
-                          } else {
-                            return SpotifyClient.turnOnShuffle();
                           }
+                          return SpotifyClient.turnOnShuffle();
                         });
   }
 
   static togglePlayPause() {
     return SpotifyClient.executeCommand(SpotifyCommands.TOGGLE_PLAY_PAUSE);
+  }
+
+  static play() {
+    return SpotifyClient.executeCommand(SpotifyCommands.PLAY);
+  }
+
+  static pause() {
+    return SpotifyClient.executeCommand(SpotifyCommands.PAUSE);
   }
 
   static goToNextTrack() {
