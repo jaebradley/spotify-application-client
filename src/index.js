@@ -1,10 +1,10 @@
 
 'use es6';
 
-import SpotifyClient from '../services/SpotifyClient';
+import SpotifyApplicationClient from '../services/SpotifyApplicationClient';
 import PlayerState from '../data/PlayerState';
 
 module.exports = {
-  SpotifyClient: SpotifyClient,
+  SpotifyApplicationClient: SpotifyApplicationClient,
   PlayerState: PlayerState
 };

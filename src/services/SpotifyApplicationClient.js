@@ -5,7 +5,7 @@ import CommandExecutor from './CommandExecutor';
 import PlayerState from '../data/PlayerState';
 import SpotifyCommands from '../data/SpotifyCommands';
 
-export default class SpotifyClient {
+export default class SpotifyApplicationClient {
   static isSpotifyRunning() {
     return CommandExecutor.execute(SpotifyCommands.IS_SPOTIFY_RUNNING);
   }
@@ -48,14 +48,14 @@ export default class SpotifyClient {
   }
 
   static toggleRepeat() {
-    return SpotifyClient.isRepeating()
-                        .then(isRepeating => {
-                          if (isRepeating) {
-                            return SpotifyClient.turnOffRepeat();
-                          }
+    return SpotifyApplicationClient.isRepeating()
+                                   .then(isRepeating => {
+                                     if (isRepeating) {
+                                       return SpotifyApplicationClient.turnOffRepeat();
+                                     }
 
-                          return SpotifyClient.turnOnRepeat();
-                        });
+                                     return SpotifyApplicationClient.turnOnRepeat();
+                                   });
   }
 
   static turnOffShuffle() {
@@ -71,13 +71,13 @@ export default class SpotifyClient {
   }
 
   static toggleShuffle() {
-    return SpotifyClient.isShuffling()
-                        .then(isShuffling => {
-                          if (isShuffling) {
-                            return SpotifyClient.turnOffShuffle();
-                          }
-                          return SpotifyClient.turnOnShuffle();
-                        });
+    return SpotifyApplicationClient.isShuffling()
+                                   .then(isShuffling => {
+                                     if (isShuffling) {
+                                       return SpotifyApplicationClient.turnOffShuffle();
+                                     }
+                                     return SpotifyApplicationClient.turnOnShuffle();
+                                   });
   }
 
   static togglePlayPause() {
