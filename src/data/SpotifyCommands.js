@@ -20,3 +20,6 @@ export const PLAY_PREVIOUS_TRACK = 'tell application "Spotify" to previous track
 export const TOGGLE_PLAY_PAUSE = 'tell application "Spotify" to playpause';
 export const PLAY = 'tell application "Spotify" to play';
 export const PAUSE = 'tell application "Spotify" to pause';
+export const PLAY_TRACK = function(trackId) {
+  return `tell application "Spotify" to play track "spotify:track:${trackId}"`
+};

@@ -3,7 +3,7 @@
 import CommandExecutor from './CommandExecutor';
 
 import PlayerState from '../data/PlayerState';
-import {IS_SPOTIFY_RUNNING, } from '../data/SpotifyCommands';
+import {IS_SPOTIFY_RUNNING, PLAY_TRACK} from '../data/SpotifyCommands';
 
 export default class SpotifyApplicationClient {
   static isSpotifyRunning() {
@@ -82,6 +82,10 @@ export default class SpotifyApplicationClient {
 
   static togglePlayPause() {
     return CommandExecutor.execute(SpotifyCommands.TOGGLE_PLAY_PAUSE);
+  }
+
+  static playTrack(trackId) {
+    return CommandExecutor.execute(PLAY_TRACK(trackId));
   }
 
   static play() {

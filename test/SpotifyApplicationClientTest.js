@@ -14,4 +14,8 @@ describe('Spotify Application Client', function() {
   it('should check if Spotify Application is running', function() {
     return SpotifyApplicationClient.isSpotifyRunning().should.eventually.be.true;
   });
+
+  it('should play track', function() {
+    return SpotifyApplicationClient.playTrack('3rEoTzDLX8jgatvpBJV9rP').should.eventually.be.true;
+  })
 });
