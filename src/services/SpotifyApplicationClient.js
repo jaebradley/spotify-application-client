@@ -3,11 +3,11 @@
 import CommandExecutor from './CommandExecutor';
 
 import PlayerState from '../data/PlayerState';
-import SpotifyCommands from '../data/SpotifyCommands';
+import {IS_SPOTIFY_RUNNING, } from '../data/SpotifyCommands';
 
 export default class SpotifyApplicationClient {
   static isSpotifyRunning() {
-    return CommandExecutor.execute(SpotifyCommands.IS_SPOTIFY_RUNNING);
+    return CommandExecutor.execute(IS_SPOTIFY_RUNNING);
   }
 
   static getSongName() {
