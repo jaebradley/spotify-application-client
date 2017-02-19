@@ -7,6 +7,8 @@ Spotify built an [AppleScript API](https://developer.spotify.com/applescript-api
 This client sits on top of this AppleScript API to provide a simple abstraction layer.
 
 ### API
+All methods return a `Promise`
+
 #### `isSpotifyRunning`
 #### `getSongName`
 #### `getAlbumName`
