@@ -30,7 +30,7 @@ before(function() {
 
 describe('Spotify Application Activation Test', function() {
   it('should check if Spotify Application is running', function() {
-    return SpotifyApplicationClient.isSpotifyRunning().should.eventually.be.true;
+    SpotifyApplicationClient.isSpotifyRunning().should.eventually.be.true;
   });
 });
 
@@ -127,5 +127,34 @@ describe('Repeating State Change Tests', function() {
   it('should toggle repeat', function() {
     return SpotifyApplicationClient.toggleRepeat()
       .then(state => checkPlayerState(initialPlayerState, false, initialShufflingState));
+  });
+});
+
+describe('Shuffling State Change Tests', function() {
+  before(function() {
+    SpotifyApplicationClient.playTrack(trackId);
+  });
+
+  const initialPlayerState = SpotifyApplicationClient.getPlayerState().then(state => state);
+  const initialRepeatingState = SpotifyApplicationClient.isRepeating().then(isRepeating => isRepeating);
+
+  it('should turn on shuffle', function() {
+    return SpotifyApplicationClient.turnOnShuffle()
+      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, true));
+  });
+
+  it('should turn off shuffle', function() {
+    return SpotifyApplicationClient.turnOffShuffle()
+      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, false));
+  });
+
+  it('should toggle shuffle', function() {
+    return SpotifyApplicationClient.toggleShuffle()
+      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, true));
+  });
+
+  it('should toggle shuffle', function() {
+    return SpotifyApplicationClient.toggleShuffle()
+      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, false));
   });
 });
