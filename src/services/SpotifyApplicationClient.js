@@ -38,7 +38,7 @@ export default class SpotifyApplicationClient {
   }
 
   static getTrackDurationInMilliseconds() {
-    return CommandExecutor.execute(GET_TRACK_DURATION_IN_SECONDS);
+    return CommandExecutor.execute(GET_TRACK_DURATION_IN_MILLISECONDS);
   }
 
   static turnOffRepeat() {

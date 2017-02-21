@@ -26,7 +26,7 @@ describe('Track Details Tests', function() {
   const expectedTrackName = 'Mess is Mine';
   const expectedAlbumName = 'Dream Your Life Away (Special Edition)';
   const expectedArtistName = 'Vance Joy';
-  const trackDurationInSeconds = 223;
+  const expectedTrackDurationInMilliseconds = 223640;
 
   before(function() {
     SpotifyApplicationClient.activateApplication();
@@ -36,6 +36,7 @@ describe('Track Details Tests', function() {
     SpotifyApplicationClient.getTrackName().should.eventually.equal(expectedTrackName);
     SpotifyApplicationClient.getAlbumName().should.eventually.equal(expectedAlbumName);
     SpotifyApplicationClient.getArtistName().should.eventually.equal(expectedArtistName);
+    SpotifyApplicationClient.getTrackDurationInMilliseconds().should.eventually.equal(expectedTrackDurationInMilliseconds);
   });
 
   it('should play track', function() {
