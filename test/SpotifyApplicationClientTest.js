@@ -18,6 +18,12 @@ const expectedAlbumName = 'Dream Your Life Away (Special Edition)';
 const expectedArtistName = 'Vance Joy';
 const expectedTrackDurationInMilliseconds = 223640;
 
+const checkPlayerState = function(playerState, isRepeating, isShuffling) {
+  SpotifyApplicationClient.getPlayerState().should.eventually.equal(playerState);
+  SpotifyApplicationClient.isRepeating().should.eventually.equal(isRepeating);
+  SpotifyApplicationClient.isShuffling().should.eventually.equal(isShuffling);
+};
+
 before(function() {
   SpotifyApplicationClient.activateApplication();
 });
@@ -42,19 +48,84 @@ describe('Track Details Tests', function() {
 });
 
 describe('Player Details Tests', function() {
+
   before(function() {
     SpotifyApplicationClient.playTrack(trackId);
   });
 
+  const initialPlayerState = SpotifyApplicationClient.getPlayerState().then(state => state);
+  const initialRepeatingState = SpotifyApplicationClient.isRepeating().then(isRepeating => isRepeating);
+  const initialShufflingState = SpotifyApplicationClient.isShuffling().then(isShuffling => isShuffling);
+
   it('should get player state', function() {
-    SpotifyApplicationClient.getPlayerState().should.eventually.equal(PlayerState.PLAYING);
+    SpotifyApplicationClient.getPlayerState().should.eventually.equal(initialPlayerState);
   });
 
   it('should get repeating state', function() {
-    SpotifyApplicationClient.isRepeating().should.eventually.be.false;
+    SpotifyApplicationClient.isRepeating().should.eventually.equal(initialRepeatingState);
   });
 
   it('should get shuffling state', function() {
-    SpotifyApplicationClient.isShuffling().should.eventually.be.false;
+    SpotifyApplicationClient.isShuffling().should.eventually.equal(initialShufflingState);
+  });
+});
+
+describe('Player State Change Tests', function() {
+  before(function() {
+    SpotifyApplicationClient.playTrack(trackId);
+  });
+
+  const initialPlayerState = SpotifyApplicationClient.getPlayerState().then(state => state);
+  const initialRepeatingState = SpotifyApplicationClient.isRepeating().then(isRepeating => isRepeating);
+  const initialShufflingState = SpotifyApplicationClient.isShuffling().then(isShuffling => isShuffling);
+
+  it('should pause', function() {
+    SpotifyApplicationClient.pause();
+    checkPlayerState(PlayerState.PAUSED, initialRepeatingState, initialShufflingState);
+  });
+
+  it('should play', function() {
+    SpotifyApplicationClient.play();
+    checkPlayerState(PlayerState.PLAYING, initialRepeatingState, initialShufflingState);
+  });
+
+  it('should toggle play/pause', function() {
+    return SpotifyApplicationClient.togglePlayPause()
+      .then(state => checkPlayerState(PlayerState.PAUSED, initialRepeatingState, initialShufflingState));
+  });
+
+  it('should toggle play/pause again', function() {
+    return SpotifyApplicationClient.togglePlayPause()
+      .then(state => checkPlayerState(PlayerState.PLAYING, initialRepeatingState, initialShufflingState));
+  });
+});
+
+describe('Repeating State Change Tests', function() {
+  before(function() {
+    SpotifyApplicationClient.playTrack(trackId);
+  });
+
+  const initialPlayerState = SpotifyApplicationClient.getPlayerState().then(state => state);
+  const initialRepeatingState = SpotifyApplicationClient.isRepeating().then(isRepeating => isRepeating);
+  const initialShufflingState = SpotifyApplicationClient.isShuffling().then(isShuffling => isShuffling);
+
+  it('should turn on repeat', function() {
+    return SpotifyApplicationClient.turnOnRepeat()
+      .then(state => checkPlayerState(initialPlayerState, true, initialShufflingState));
+  });
+
+  it('should turn off repeat', function() {
+    return SpotifyApplicationClient.turnOffRepeat()
+      .then(state => checkPlayerState(initialPlayerState, false, initialShufflingState));
+  });
+
+  it('should toggle repeat', function() {
+    return SpotifyApplicationClient.toggleRepeat()
+      .then(state => checkPlayerState(initialPlayerState, true, initialShufflingState));
+  });
+
+  it('should toggle repeat', function() {
+    return SpotifyApplicationClient.toggleRepeat()
+      .then(state => checkPlayerState(initialPlayerState, false, initialShufflingState));
   });
 });

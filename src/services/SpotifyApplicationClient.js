@@ -6,7 +6,9 @@ import PlayerState from '../data/PlayerState';
 import {IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, GET_TRACK_NAME, PLAY_TRACK,
         GET_ALBUM_NAME, GET_ARTIST_NAME, GET_TRACK_DURATION_IN_MILLISECONDS,
         GET_PLAYER_STATE, GET_PLAYER_POSITION_IN_SECONDS, IS_REPEATING,
-        IS_SHUFFLING } from '../data/SpotifyCommands';
+        IS_SHUFFLING, TURN_OFF_REPEAT, TURN_ON_REPEAT, TURN_OFF_SHUFFLE,
+        TURN_ON_SHUFFLE, TOGGLE_PLAY_PAUSE, PLAY, PAUSE, PLAY_NEXT_TRACK,
+        PLAY_PREVIOUS_TRACK } from '../data/SpotifyCommands';
 
 export default class SpotifyApplicationClient {
   static isSpotifyRunning() {
@@ -43,11 +45,11 @@ export default class SpotifyApplicationClient {
   }
 
   static turnOffRepeat() {
-    return CommandExecutor.execute(SpotifyCommands.TURN_OFF_REPEAT);
+    return CommandExecutor.execute(TURN_OFF_REPEAT);
   }
 
   static turnOnRepeat() {
-    return CommandExecutor.execute(SpotifyCommands.TURN_ON_REPEAT);
+    return CommandExecutor.execute(TURN_ON_REPEAT);
   }
 
   static isRepeating() {
@@ -66,11 +68,11 @@ export default class SpotifyApplicationClient {
   }
 
   static turnOffShuffle() {
-    return CommandExecutor.execute(SpotifyCommands.TURN_OFF_SHUFFLE);
+    return CommandExecutor.execute(TURN_OFF_SHUFFLE);
   }
 
   static turnOnShuffle() {
-    return CommandExecutor.execute(SpotifyCommands.TURN_ON_SHUFFLE);
+    return CommandExecutor.execute(TURN_ON_SHUFFLE);
   }
 
   static isShuffling() {
@@ -88,7 +90,7 @@ export default class SpotifyApplicationClient {
   }
 
   static togglePlayPause() {
-    return CommandExecutor.execute(SpotifyCommands.TOGGLE_PLAY_PAUSE);
+    return CommandExecutor.execute(TOGGLE_PLAY_PAUSE);
   }
 
   static playTrack(trackId) {
@@ -96,18 +98,18 @@ export default class SpotifyApplicationClient {
   }
 
   static play() {
-    return CommandExecutor.execute(SpotifyCommands.PLAY);
+    return CommandExecutor.execute(PLAY);
   }
 
   static pause() {
-    return CommandExecutor.execute(SpotifyCommands.PAUSE);
+    return CommandExecutor.execute(PAUSE);
   }
 
   static playNextTrack() {
-    return CommandExecutor.execute(SpotifyCommands.PLAY_NEXT_TRACK);
+    return CommandExecutor.execute(PLAY_NEXT_TRACK);
   }
 
   static playPreviousTrack() {
-    return CommandExecutor.execute(SpotifyCommands.PLAY_PREVIOUS_TRACK);
+    return CommandExecutor.execute(PLAY_PREVIOUS_TRACK);
   }
 }
