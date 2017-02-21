@@ -10,12 +10,35 @@ chai.should();
 
 import SpotifyApplicationClient from '../src/services/SpotifyApplicationClient'
 
-describe('Spotify Application Client', function() {
+describe('Spotify Application Activation Test', function() {
+  before(function() {
+    SpotifyApplicationClient.activateApplication();
+  });
+
   it('should check if Spotify Application is running', function() {
     return SpotifyApplicationClient.isSpotifyRunning().should.eventually.be.true;
   });
+});
+
+describe('Track Details Tests', function() {
+  // Mess is Mine by Vance Joy from Dream Your Life Away (Special Edition)
+  const trackId = '29jtZGdgpE2lWm2mkIt6HS';
+  const expectedTrackName = 'Mess is Mine';
+  const expectedAlbumName = 'Dream Your Life Away (Special Edition)';
+  const expectedArtistName = 'Vance Joy';
+  const trackDurationInSeconds = 223;
+
+  before(function() {
+    SpotifyApplicationClient.activateApplication();
+  });
+
+  after(function() {
+    SpotifyApplicationClient.getTrackName().should.eventually.equal(expectedTrackName);
+    SpotifyApplicationClient.getAlbumName().should.eventually.equal(expectedAlbumName);
+    SpotifyApplicationClient.getArtistName().should.eventually.equal(expectedArtistName);
+  });
 
   it('should play track', function() {
-    return SpotifyApplicationClient.playTrack('3rEoTzDLX8jgatvpBJV9rP').should.eventually.be.true;
-  })
+    SpotifyApplicationClient.playTrack(trackId);
+  });
 });

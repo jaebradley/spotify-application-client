@@ -3,7 +3,9 @@
 import CommandExecutor from './CommandExecutor';
 
 import PlayerState from '../data/PlayerState';
-import {IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, PLAY_TRACK} from '../data/SpotifyCommands';
+import {IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, GET_TRACK_NAME, PLAY_TRACK,
+        GET_ALBUM_NAME, GET_ARTIST_NAME, GET_TRACK_DURATION_IN_MILLISECONDS,
+        } from '../data/SpotifyCommands';
 
 export default class SpotifyApplicationClient {
   static isSpotifyRunning() {
@@ -14,16 +16,16 @@ export default class SpotifyApplicationClient {
     return CommandExecutor.execute(ACTIVATE_APPLICATION);
   }
 
-  static getSongName() {
-    return CommandExecutor.execute(SpotifyCommands.GET_SONG_NAME);
+  static getTrackName() {
+    return CommandExecutor.execute(GET_TRACK_NAME);
   }
 
   static getAlbumName() {
-    return CommandExecutor.execute(SpotifyCommands.GET_ALBUM_NAME);
+    return CommandExecutor.execute(GET_ALBUM_NAME);
   }
 
   static getArtistName() {
-    return CommandExecutor.execute(SpotifyCommands.GET_ARTIST_NAME);
+    return CommandExecutor.execute(GET_ARTIST_NAME);
   }
 
   static getPlayerState() {
@@ -35,8 +37,8 @@ export default class SpotifyApplicationClient {
     return CommandExecutor.execute(SpotifyCommands.GET_PLAYER_POSITION_IN_SECONDS);
   }
 
-  static getTrackDurationInSeconds() {
-    return CommandExecutor.execute(SpotifyCommands.GET_TRACK_DURATION_IN_SECONDS);
+  static getTrackDurationInMilliseconds() {
+    return CommandExecutor.execute(GET_TRACK_DURATION_IN_SECONDS);
   }
 
   static turnOffRepeat() {
