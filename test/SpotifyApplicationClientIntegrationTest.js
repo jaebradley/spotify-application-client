@@ -8,6 +8,7 @@ chai.should();
 import SpotifyApplicationClient from '../src/services/SpotifyApplicationClient';
 import PlayerState from '../src/data/PlayerState';
 
+// INTEGRATION TEST TO BE RUN LOCALLY
 // Mess is Mine by Vance Joy from Dream Your Life Away (Special Edition)
 const trackId = '29jtZGdgpE2lWm2mkIt6HS';
 const expectedTrackName = 'Mess is Mine';
@@ -155,30 +156,30 @@ describe('Shuffling State Change Tests', function() {
     return SpotifyApplicationClient.toggleShuffle()
       .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, false));
   });
+});
 
-  describe('Playing Track From Album Tests', function() {
-    // Dream Your Life Away (Special Edition)
-    const albumId = "5S9b8euumqMhQbMk0zzQdH";
+describe('Playing Track From Album Tests', function() {
+  // Dream Your Life Away (Special Edition)
+  const albumId = "5S9b8euumqMhQbMk0zzQdH";
 
-    // Wasted Time
-    const nextTrackId = "4hjJBjxN6IT0sDyTGlo5tA";
-    const nextTrackName = "Wasted Time";
-    const nextTrackDuration = 300973;
+  // Wasted Time
+  const nextTrackId = "4hjJBjxN6IT0sDyTGlo5tA";
+  const nextTrackName = "Wasted Time";
+  const nextTrackDuration = 300973;
 
-    before(function() {
-      SpotifyApplicationClient.playTrackFromAlbum(trackId, albumId);
-    });
+  before(function() {
+    SpotifyApplicationClient.playTrackFromAlbum(trackId, albumId);
+  });
 
-    it('should play next track', function() {
-      SpotifyApplicationClient.playNextTrack();
-      checkTrackState(nextTrackName, expectedAlbumName, expectedArtistName,
-                      nextTrackDuration);
-    });
+  it('should play next track', function() {
+    SpotifyApplicationClient.playNextTrack();
+    checkTrackState(nextTrackName, expectedAlbumName, expectedArtistName,
+                    nextTrackDuration);
+  });
 
-    it('should play previous track', function() {
-      SpotifyApplicationClient.playPreviousTrack();
-      checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
-                      expectedTrackDurationInMilliseconds);
-    })
+  it('should play previous track', function() {
+    SpotifyApplicationClient.playPreviousTrack();
+    checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
+                    expectedTrackDurationInMilliseconds);
   });
 });
