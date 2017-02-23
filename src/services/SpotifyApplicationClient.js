@@ -8,7 +8,7 @@ import {IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, GET_TRACK_NAME, PLAY_TRACK,
         GET_PLAYER_STATE, GET_PLAYER_POSITION_IN_SECONDS, IS_REPEATING,
         IS_SHUFFLING, TURN_OFF_REPEAT, TURN_ON_REPEAT, TURN_OFF_SHUFFLE,
         TURN_ON_SHUFFLE, TOGGLE_PLAY_PAUSE, PLAY, PAUSE, PLAY_NEXT_TRACK,
-        PLAY_PREVIOUS_TRACK } from '../data/SpotifyCommands';
+        PLAY_PREVIOUS_TRACK, PLAY_TRACK_FROM_ALBUM } from '../data/SpotifyCommands';
 
 export default class SpotifyApplicationClient {
   static isSpotifyRunning() {
@@ -95,6 +95,10 @@ export default class SpotifyApplicationClient {
 
   static playTrack(trackId) {
     return CommandExecutor.execute(PLAY_TRACK(trackId));
+  }
+
+  static playTrackFromAlbum(trackId, albumId) {
+    return CommandExecutor.execute(PLAY_TRACK_FROM_ALBUM(trackId, albumId));
   }
 
   static play() {
