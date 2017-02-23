@@ -24,3 +24,6 @@ export const PAUSE = 'tell application "Spotify" to pause';
 export const PLAY_TRACK = function(trackId) {
   return `tell application "Spotify" to play track "spotify:track:${trackId}"`
 };
+export const PLAY_TRACK_FROM_ALBUM = function(trackId, albumId) {
+  return `${PLAY_TRACK(trackId)} in context "spotify:album:${albumId}"`;
+}

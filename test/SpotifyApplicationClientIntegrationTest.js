@@ -8,12 +8,20 @@ chai.should();
 import SpotifyApplicationClient from '../src/services/SpotifyApplicationClient';
 import PlayerState from '../src/data/PlayerState';
 
+// INTEGRATION TEST TO BE RUN LOCALLY
 // Mess is Mine by Vance Joy from Dream Your Life Away (Special Edition)
 const trackId = '29jtZGdgpE2lWm2mkIt6HS';
 const expectedTrackName = 'Mess is Mine';
 const expectedAlbumName = 'Dream Your Life Away (Special Edition)';
 const expectedArtistName = 'Vance Joy';
 const expectedTrackDurationInMilliseconds = 223640;
+
+const checkTrackState = function(trackName, albumName, artistName, trackDuration) {
+  SpotifyApplicationClient.getTrackName().should.eventually.equal(trackName);
+  SpotifyApplicationClient.getAlbumName().should.eventually.equal(albumName);
+  SpotifyApplicationClient.getArtistName().should.eventually.equal(artistName);
+  SpotifyApplicationClient.getTrackDurationInMilliseconds().should.eventually.equal(trackDuration);
+};
 
 const checkPlayerState = function(playerState, isRepeating, isShuffling) {
   SpotifyApplicationClient.getPlayerState().should.eventually.equal(playerState);
@@ -32,20 +40,14 @@ describe('Spotify Application Activation Test', function() {
 });
 
 describe('Track Details Tests', function() {
-  after(function() {
-    SpotifyApplicationClient.getTrackName().should.eventually.equal(expectedTrackName);
-    SpotifyApplicationClient.getAlbumName().should.eventually.equal(expectedAlbumName);
-    SpotifyApplicationClient.getArtistName().should.eventually.equal(expectedArtistName);
-    SpotifyApplicationClient.getTrackDurationInMilliseconds().should.eventually.equal(expectedTrackDurationInMilliseconds);
-  });
-
   it('should play track', function() {
     SpotifyApplicationClient.playTrack(trackId);
+    checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
+                    expectedTrackDurationInMilliseconds);
   });
 });
 
 describe('Player Details Tests', function() {
-
   before(function() {
     SpotifyApplicationClient.playTrack(trackId);
   });
@@ -153,5 +155,31 @@ describe('Shuffling State Change Tests', function() {
   it('should toggle shuffle', function() {
     return SpotifyApplicationClient.toggleShuffle()
       .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, false));
+  });
+});
+
+describe('Playing Track From Album Tests', function() {
+  // Dream Your Life Away (Special Edition)
+  const albumId = "5S9b8euumqMhQbMk0zzQdH";
+
+  // Wasted Time
+  const nextTrackId = "4hjJBjxN6IT0sDyTGlo5tA";
+  const nextTrackName = "Wasted Time";
+  const nextTrackDuration = 300973;
+
+  before(function() {
+    SpotifyApplicationClient.playTrackFromAlbum(trackId, albumId);
+  });
+
+  it('should play next track', function() {
+    SpotifyApplicationClient.playNextTrack();
+    checkTrackState(nextTrackName, expectedAlbumName, expectedArtistName,
+                    nextTrackDuration);
+  });
+
+  it('should play previous track', function() {
+    SpotifyApplicationClient.playPreviousTrack();
+    checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
+                    expectedTrackDurationInMilliseconds);
   });
 });
