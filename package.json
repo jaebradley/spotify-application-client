@@ -24,6 +24,7 @@
   "homepage": "https://github.com/jaebradley/spotify-application-client#readme",
   "dependencies": {
     "enumify": "^1.0.4",
+    "immutable": "^3.8.1",
     "node-osascript": "^1.0.4"
   },
   "devDependencies": {
