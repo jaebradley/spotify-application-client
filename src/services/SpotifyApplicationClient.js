@@ -31,6 +31,25 @@ export default class SpotifyApplicationClient {
     return CommandExecutor.execute(GET_ARTIST_NAME);
   }
 
+  static getTrackDurationInMilliseconds() {
+    return CommandExecutor.execute(GET_TRACK_DURATION_IN_MILLISECONDS);
+  }
+
+  static getTrackDetails() {
+    return Promise.all([SpotifyApplicationClient.getTrackName(),
+                        SpotifyApplicationClient.getAlbumName(),
+                        SpotifyApplicationClient.getArtistName(),
+                        SpotifyApplicationClient.getTrackDurationInMilliseconds()
+                      ]).then((trackName, albumName, artistName, trackDurationInMilliseconds) => {
+                        new TrackDetails({
+                          name: trackName,
+                          albumName: albumName,
+                          artistName: artistName,
+                          trackDurationInMilliseconds: trackDurationInMilliseconds
+                        });
+                      });
+  }
+
   static getPlayerState() {
     return CommandExecutor.execute(GET_PLAYER_STATE)
                           .then(stateValue => PlayerState.valueOf(stateValue));
@@ -38,10 +57,6 @@ export default class SpotifyApplicationClient {
 
   static getPlayerPositionInSeconds() {
     return CommandExecutor.execute(GET_PLAYER_POSITION_IN_SECONDS);
-  }
-
-  static getTrackDurationInMilliseconds() {
-    return CommandExecutor.execute(GET_TRACK_DURATION_IN_MILLISECONDS);
   }
 
   static turnOffRepeat() {
