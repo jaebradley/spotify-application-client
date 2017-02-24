@@ -55,7 +55,7 @@ describe('Track Details Tests', function() {
       trackDurationInMilliseconds: expectedTrackDurationInMilliseconds
     });
     SpotifyApplicationClient.getTrackDetails().should.eventually.equal(expectedTrackDetails);
-  })
+  });
 });
 
 describe('Player Details Tests', function() {
