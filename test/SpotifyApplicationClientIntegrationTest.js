@@ -7,6 +7,7 @@ chai.should();
 
 import SpotifyApplicationClient from '../src/services/SpotifyApplicationClient';
 import PlayerState from '../src/data/PlayerState';
+import PlayerDetails from '../src/data/PlayerDetails';
 import TrackDetails from '../src/data/TrackDetails';
 
 // INTEGRATION TEST TO BE RUN LOCALLY
@@ -78,6 +79,17 @@ describe('Player Details Tests', function() {
   it('should get shuffling state', function() {
     SpotifyApplicationClient.isShuffling().should.eventually.equal(initialShufflingState);
   });
+
+  it('should get player details', function() {
+    const playerDetails = SpotifyApplicationClient.getPlayerDetails()
+      .then(details => {
+        details.state.should.eql(initialPlayerState);
+        details.positionInSeconds.should.be.above(0);
+        details.isShuffling.should.eql(initialShufflingState);
+        details.isRepeating.should.eql(initialRepeatingState);
+        details.isSpotifyRunning.should.be.true;
+      });
+  })
 });
 
 describe('Player State Change Tests', function() {
