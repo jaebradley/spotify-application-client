@@ -3,6 +3,9 @@
 import CommandExecutor from './CommandExecutor';
 
 import PlayerState from '../data/PlayerState';
+import PlayerDetails from '../data/PlayerDetails';
+import TrackDetails from '../data/TrackDetails';
+
 import {IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, GET_TRACK_NAME, PLAY_TRACK,
         GET_ALBUM_NAME, GET_ARTIST_NAME, GET_TRACK_DURATION_IN_MILLISECONDS,
         GET_PLAYER_STATE, GET_PLAYER_POSITION_IN_SECONDS, IS_REPEATING,
@@ -92,6 +95,23 @@ export default class SpotifyApplicationClient {
 
   static isShuffling() {
     return CommandExecutor.execute(IS_SHUFFLING);
+  }
+
+  static getPlayerDetails() {
+    return Promise.all([SpotifyApplicationClient.getPlayerState(),
+                        SpotifyApplicationClient.getPlayerPositionInSeconds(),
+                        SpotifyApplicationClient.isShuffling(),
+                        SpotifyApplicationClient.isRepeating(),
+                        SpotifyApplicationClient.isSpotifyRunning()
+                      ]).then((playerState, playerPositionInSeconds, isShuffling, isRepeating, isSpotifyRunning) => {
+                        return new PlayerDetails({
+                          state: playerState,
+                          positionInSeconds: playerPositionInSeconds,
+                          isShuffling: isShuffling,
+                          isRepeating: isRepeating,
+                          isSpotifyRunning: isSpotifyRunning
+                        });
+                      });
   }
 
   static toggleShuffle() {
