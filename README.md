@@ -63,7 +63,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 
 #### `getTrackDurationInMilliseconds`
 * Fetch the current track duration, in milliseconds
-* Returns a `Promise` containing a `Float` that describes the current track's duration, in milliseconds
+* Returns a `Promise` containing an `Integer` that describes the current track's duration, in milliseconds
 
 #### `turnOffRepeat`
 * Turn off the repeat state
