@@ -127,7 +127,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 
 #### `getTrackDetails`
 * Fetches details about the current track
-* Returns a `Promise` containing a `TrackDetails` object.
+* Returns a `Promise` containing a [`TrackDetails`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/TrackDetails.js) object.
 * The `TrackDetails` object has the following fields:
   * `name`: the track name
   * `albumName`: the track's album name
@@ -136,7 +136,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 
 #### `getPlayerDetails`
 * Fetches details about the player
-* Returns a `Promise` a containing a `PlayerDetails` object
+* Returns a `Promise` a containing a [`PlayerDetails`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/PlayerDetails.js) object
 * The `PlayerDetails` object has the following fields:
   * `state`: a `PlayerState` object (`PLAYING`, `PAUSED`, `STOPPED`)
   * `positionInSeconds`: the player's position, in seconds
