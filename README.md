@@ -8,7 +8,33 @@ Spotify built an [AppleScript API](https://developer.spotify.com/applescript-api
 
 This client sits on top of this AppleScript API to provide a simple abstraction layer.
 
+### Install
+`npm install spotify-application-client`
+
 ### API
+* [`isSpotifyRunning`](https://github.com/jaebradley/spotify-application-client#isspotifyrunning)
+* [`getTrackName`](https://github.com/jaebradley/spotify-application-client#gettrackname)
+* [`getAlbumName`](https://github.com/jaebradley/spotify-application-client#getalbumname)
+* [`getArtistName`](https://github.com/jaebradley/spotify-application-client#getartistname)
+* [`getPlayerState`](https://github.com/jaebradley/spotify-application-client#getplayerstate)
+* [`getPlayerPositionInSeconds`](https://github.com/jaebradley/spotify-application-client#getplayerpositioninseconds)
+* [`getTrackDurationInMilliseconds`](https://github.com/jaebradley/spotify-application-client#gettrackdurationinmilliseconds)
+* [`turnOffRepeat`](https://github.com/jaebradley/spotify-application-client#turnoffrepeat)
+* [`turnOnRepeat`](https://github.com/jaebradley/spotify-application-client#turnonrepeat)
+* [`isRepeating`](https://github.com/jaebradley/spotify-application-client#isrepeating)
+* [`toggleRepeat`](https://github.com/jaebradley/spotify-application-client#togglerepeat)
+* [`turnOnShuffle`](https://github.com/jaebradley/spotify-application-client#turnonshuffle)
+* [`isShuffling`](https://github.com/jaebradley/spotify-application-client#isshuffling)
+* [`toggleShuffle`](https://github.com/jaebradley/spotify-application-client#toggleshuffle)
+* [`togglePlayPause`](https://github.com/jaebradley/spotify-application-client#toggleplaypause)
+* [`play`](https://github.com/jaebradley/spotify-application-client#play)
+* [`pause`](https://github.com/jaebradley/spotify-application-client#pause)
+* [`playNextTrack`](https://github.com/jaebradley/spotify-application-client#playnexttrack)
+* [`playPreviousTrack`](https://github.com/jaebradley/spotify-application-client#playprevioustrack)
+* [`playTrack(trackId)`](https://github.com/jaebradley/spotify-application-client#playtrackfromalbumtrackid)
+* [`playTrackFromAlbum(trackId, albumId)`](https://github.com/jaebradley/spotify-application-client#playtrackfromalbumtrackid-albumid)
+* [`getTrackDetails`](https://github.com/jaebradley/spotify-application-client#gettrackdetails)
+* [`getPlayerDetails`](https://github.com/jaebradley/spotify-application-client#getplayerdetails)
 
 #### `isSpotifyRunning`
 * Check to see if the Spotify application is running
@@ -72,15 +98,15 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `togglePlayPause`
-* Flips the player state between `PLAYING` and `PAUSED`
+* Change the player state between `PLAYING` and `PAUSED`; if the player is `PLAYING`, then it will be `PAUSED`, and if its `PAUSED`, then it will be `PLAYING`.
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `play`
-* Turns the player state to `PLAYING`
+* Change the player state to `PLAYING`
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `pause`
-* Turns the player state to `PAUSED`
+* Change the player state to `PAUSED`
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `playNextTrack`
