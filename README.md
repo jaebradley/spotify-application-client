@@ -8,6 +8,9 @@ Spotify built an [AppleScript API](https://developer.spotify.com/applescript-api
 
 This client sits on top of this AppleScript API to provide a simple abstraction layer.
 
+### Install
+`npm install spotify-application-client`
+
 ### API
 * [`isSpotifyRunning`](https://github.com/jaebradley/spotify-application-client#isspotifyrunning)
 * [`getTrackName`](https://github.com/jaebradley/spotify-application-client#gettrackname)
@@ -95,15 +98,15 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `togglePlayPause`
-* Flips the player state between `PLAYING` and `PAUSED`
+* Change the player state between `PLAYING` and `PAUSED`; if the player is `PLAYING`, then it will be `PAUSED`, and if its `PAUSED`, then it will be `PLAYING`.
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `play`
-* Turns the player state to `PLAYING`
+* Change the player state to `PLAYING`
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `pause`
-* Turns the player state to `PAUSED`
+* Change the player state to `PAUSED`
 * Returns a `Promise` containing `null` if the state change is successful
 
 #### `playNextTrack`
