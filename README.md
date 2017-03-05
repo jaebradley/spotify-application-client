@@ -9,6 +9,29 @@ Spotify built an [AppleScript API](https://developer.spotify.com/applescript-api
 This client sits on top of this AppleScript API to provide a simple abstraction layer.
 
 ### API
+* [`isSpotifyRunning`](https://github.com/jaebradley/spotify-application-client#isspotifyrunning)
+* [`getTrackName`](https://github.com/jaebradley/spotify-application-client#gettrackname)
+* [`getAlbumName`](https://github.com/jaebradley/spotify-application-client#getalbumname)
+* [`getArtistName`](https://github.com/jaebradley/spotify-application-client#getartistname)
+* [`getPlayerState`](https://github.com/jaebradley/spotify-application-client#getplayerstate)
+* [`getPlayerPositionInSeconds`](https://github.com/jaebradley/spotify-application-client#getplayerpositioninseconds)
+* [`getTrackDurationInMilliseconds`](https://github.com/jaebradley/spotify-application-client#gettrackdurationinmilliseconds)
+* [`turnOffRepeat`](https://github.com/jaebradley/spotify-application-client#turnoffrepeat)
+* [`turnOnRepeat`](https://github.com/jaebradley/spotify-application-client#turnonrepeat)
+* [`isRepeating`](https://github.com/jaebradley/spotify-application-client#isrepeating)
+* [`toggleRepeat`](https://github.com/jaebradley/spotify-application-client#togglerepeat)
+* [`turnOnShuffle`](https://github.com/jaebradley/spotify-application-client#turnonshuffle)
+* [`isShuffling`](https://github.com/jaebradley/spotify-application-client#isshuffling)
+* [`toggleShuffle`](https://github.com/jaebradley/spotify-application-client#toggleshuffle)
+* [`togglePlayPause`](https://github.com/jaebradley/spotify-application-client#toggleplaypause)
+* [`play`](https://github.com/jaebradley/spotify-application-client#play)
+* [`pause`](https://github.com/jaebradley/spotify-application-client#pause)
+* [`playNextTrack`](https://github.com/jaebradley/spotify-application-client#playnexttrack)
+* [`playPreviousTrack`](https://github.com/jaebradley/spotify-application-client#playprevioustrack)
+* [`playTrack(trackId)`](https://github.com/jaebradley/spotify-application-client#playtrackfromalbumtrackid)
+* [`playTrackFromAlbum(trackId, albumId)`](https://github.com/jaebradley/spotify-application-client#playtrackfromalbumtrackid-albumid)
+* [`getTrackDetails`](https://github.com/jaebradley/spotify-application-client#gettrackdetails)
+* [`getPlayerDetails`](https://github.com/jaebradley/spotify-application-client#getplayerdetails)
 
 #### `isSpotifyRunning`
 * Check to see if the Spotify application is running
