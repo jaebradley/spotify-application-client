@@ -10,7 +10,7 @@ export default class PlayerState extends Enum {
       }
     }
 
-    throw new ValueError(`Unable to identify player state for ${value}`);
+    throw new Error(`Unable to identify player state for ${value}`);
   }
 };
 
