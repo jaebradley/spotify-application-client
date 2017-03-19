@@ -5,7 +5,7 @@ import {Enum} from 'enumify';
 export default class PlayerState extends Enum {
   static valueOf(value) {
     for (const state of PlayerState.enumValues) {
-      if (state.value == value) {
+      if (state.value == value.trim()) {
         return state;
       }
     }
