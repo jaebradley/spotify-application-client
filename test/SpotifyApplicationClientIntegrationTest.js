@@ -55,10 +55,10 @@ describe('Spotify Application Activation Test', function() {
 
 describe('Track Details Tests', function() {
   it('should play track', function() {
-    return SpotifyApplicationClient.playTrack(trackId).then(() => {
-      return checkTrackState(expectedTrackName, expectedAlbumName,
-                             expectedArtistName, expectedTrackDurationInMilliseconds);
-    });
+    return SpotifyApplicationClient.playTrack(trackId)
+      .then( () => checkTrackState(expectedTrackName, expectedAlbumName,
+                                   expectedArtistName,
+                                   expectedTrackDurationInMilliseconds));
   });
 
   it('should get track details', function() {
@@ -68,7 +68,8 @@ describe('Track Details Tests', function() {
       artistName: expectedArtistName,
       trackDurationInMilliseconds: expectedTrackDurationInMilliseconds
     });
-    return SpotifyApplicationClient.getTrackDetails().should.become(expectedTrackDetails);
+    return SpotifyApplicationClient.getTrackDetails()
+      .should.become(expectedTrackDetails);
   });
 });
 
@@ -78,7 +79,8 @@ describe('Player Details Tests', function() {
   });
 
   it('should get player state', function() {
-    return SpotifyApplicationClient.getPlayerState().should.become(PlayerState.PLAYING);
+    return SpotifyApplicationClient.getPlayerState()
+      .should.become(PlayerState.PLAYING);
   });
 
   it('should get repeating state', function() {
@@ -91,13 +93,15 @@ describe('Player Details Tests', function() {
 
   it('should get player details', function() {
     const playerDetails = SpotifyApplicationClient.getPlayerDetails()
-      .then(details => {
-        details.state.should.become(initialPlayerState);
-        details.positionInSeconds.should.be.above(0);
-        details.isShuffling.should.become(initialShufflingState);
-        details.isRepeating.should.become(initialRepeatingState);
-        details.isSpotifyRunning.should.become(true);
-      });
+      .then(details =>
+        {
+          details.state.should.become(initialPlayerState);
+          details.positionInSeconds.should.be.above(0);
+          details.isShuffling.should.become(initialShufflingState);
+          details.isRepeating.should.become(initialRepeatingState);
+          details.isSpotifyRunning.should.become(true);
+      }
+    );
   })
 });
 
@@ -106,26 +110,35 @@ describe('Player State Change Tests', function() {
     return SpotifyApplicationClient.playTrack(trackId);
   });
 
-  const initialPlayerState = PlayerState.PAUSED;
   const initialRepeatingState = false;
   const initialShufflingState = false;
 
   it('should pause', function() {
-    return SpotifyApplicationClient.pause().then(() => checkPlayerState(PlayerState.PAUSED, initialRepeatingState, initialShufflingState));
+    return SpotifyApplicationClient.pause()
+      .then( () => checkPlayerState(PlayerState.PAUSED,
+                                    initialRepeatingState,
+                                    initialShufflingState));
   });
 
   it('should play', function() {
-    return SpotifyApplicationClient.play().then( () => checkPlayerState(PlayerState.PLAYING, initialRepeatingState, initialShufflingState));
+    return SpotifyApplicationClient.play()
+      .then( () => checkPlayerState(PlayerState.PLAYING,
+                                    initialRepeatingState,
+                                    initialShufflingState));
   });
 
   it('should toggle play/pause', function() {
     return SpotifyApplicationClient.togglePlayPause()
-      .then(state => checkPlayerState(PlayerState.PAUSED, initialRepeatingState, initialShufflingState));
+      .then(state => checkPlayerState(PlayerState.PAUSED,
+                                      initialRepeatingState,
+                                      initialShufflingState));
   });
 
   it('should toggle play/pause again', function() {
     return SpotifyApplicationClient.togglePlayPause()
-      .then(state => checkPlayerState(PlayerState.PLAYING, initialRepeatingState, initialShufflingState));
+      .then(state => checkPlayerState(PlayerState.PLAYING,
+                                      initialRepeatingState,
+                                      initialShufflingState));
   });
 });
 
@@ -140,22 +153,30 @@ describe('Repeating State Change Tests', function() {
 
   it('should turn on repeat', function() {
     return SpotifyApplicationClient.turnOnRepeat()
-      .then(state => checkPlayerState(initialPlayerState, true, initialShufflingState));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      true,
+                                      initialShufflingState));
   });
 
   it('should turn off repeat', function() {
     return SpotifyApplicationClient.turnOffRepeat()
-      .then(state => checkPlayerState(initialPlayerState, false, initialShufflingState));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      false,
+                                      initialShufflingState));
   });
 
   it('should toggle repeat', function() {
     return SpotifyApplicationClient.toggleRepeat()
-      .then(state => checkPlayerState(initialPlayerState, true, initialShufflingState));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      true,
+                                      initialShufflingState));
   });
 
   it('should toggle repeat', function() {
     return SpotifyApplicationClient.toggleRepeat()
-      .then(state => checkPlayerState(initialPlayerState, false, initialShufflingState));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      false,
+                                      initialShufflingState));
   });
 });
 
@@ -169,22 +190,30 @@ describe('Shuffling State Change Tests', function() {
 
   it('should turn on shuffle', function() {
     return SpotifyApplicationClient.turnOnShuffle()
-      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, true));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      initialRepeatingState,
+                                      true));
   });
 
   it('should turn off shuffle', function() {
     return SpotifyApplicationClient.turnOffShuffle()
-      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, false));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      initialRepeatingState,
+                                      false));
   });
 
   it('should toggle shuffle', function() {
     return SpotifyApplicationClient.toggleShuffle()
-      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, true));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      initialRepeatingState,
+                                      true));
   });
 
   it('should toggle shuffle', function() {
     return SpotifyApplicationClient.toggleShuffle()
-      .then(state => checkPlayerState(initialPlayerState, initialRepeatingState, false));
+      .then(state => checkPlayerState(initialPlayerState,
+                                      initialRepeatingState,
+                                      false));
   });
 });
 
@@ -207,15 +236,26 @@ describe('Playing Track From Album Tests', function() {
   });
 
   it('should play next track', function() {
-    return SpotifyApplicationClient.playNextTrack().then( () => {
-      return checkTrackState(nextTrackName, expectedAlbumName, expectedArtistName,
-                    nextTrackDuration)
-                  });
+    return SpotifyApplicationClient.playNextTrack()
+      .then( () =>
+        {
+          return checkTrackState(nextTrackName,
+                                 expectedAlbumName,
+                                 expectedArtistName,
+                                 nextTrackDuration);
+        }
+      );
   });
 
   it('should play previous track', function() {
-    return SpotifyApplicationClient.playPreviousTrack().then( () => {
-      return checkTrackState(previousTrackName, expectedAlbumName, expectedArtistName,
-                    previousTrackDuration)});
+    return SpotifyApplicationClient.playPreviousTrack()
+      .then( () =>
+        {
+          return checkTrackState(previousTrackName,
+                                 expectedAlbumName,
+                                 expectedArtistName,
+                                 previousTrackDuration);
+        }
+      );
   });
 });
