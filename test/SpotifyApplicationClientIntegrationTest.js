@@ -197,12 +197,15 @@ describe('Playing Track From Album Tests', function() {
   });
 
   it('should play next track', function() {
-    return SpotifyApplicationClient.playNextTrack().then( () => return checkTrackState(nextTrackName, expectedAlbumName, expectedArtistName,
-                    nextTrackDuration));
+    return SpotifyApplicationClient.playNextTrack().then( () => {
+      return checkTrackState(nextTrackName, expectedAlbumName, expectedArtistName,
+                    nextTrackDuration)
+                  });
   });
 
   it('should play previous track', function() {
-    return SpotifyApplicationClient.playPreviousTrack().then( () => return checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
-                    expectedTrackDurationInMilliseconds));
+    return SpotifyApplicationClient.playPreviousTrack().then( () => {
+      return checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
+                    expectedTrackDurationInMilliseconds)});
   });
 });
