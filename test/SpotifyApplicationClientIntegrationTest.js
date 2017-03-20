@@ -22,20 +22,25 @@ const expectedArtistName = 'Vance Joy';
 const expectedTrackDurationInMilliseconds = 223640;
 
 const checkTrackState = function(trackName, albumName, artistName, trackDuration) {
-  return Promise.all([
-    SpotifyApplicationClient.getTrackName().should.become(trackName),
-    SpotifyApplicationClient.getAlbumName().should.become(albumName),
-    SpotifyApplicationClient.getArtistName().should.become(artistName),
-    SpotifyApplicationClient.getTrackDurationInMilliseconds().should.become(trackDuration)
-  ]);
+  const expected = new TrackDetails({
+    name: trackName,
+    albumName: albumName,
+    artistName: artistName,
+    trackDurationInMilliseconds: trackDuration
+  });
+  return SpotifyApplicationClient.getTrackDetails()
+    .then(details => {
+      details.should.eql(expected);
+    });
 };
 
 const checkPlayerState = function(playerState, isRepeating, isShuffling) {
-  return Promise.all([
-    SpotifyApplicationClient.getPlayerState().should.become(playerState),
-    SpotifyApplicationClient.isRepeating().should.become(isRepeating),
-    SpotifyApplicationClient.isShuffling().should.become(isShuffling)
-  ]);
+  return SpotifyApplicationClient.getPlayerDetails()
+    .then(details => {
+      details.state.should.eql(playerState);
+      details.isShuffling.should.eql(isShuffling);
+      details.isRepeating.should.eql(isRepeating);
+    });
 };
 
 before(function() {
@@ -185,14 +190,19 @@ describe('Shuffling State Change Tests', function() {
 
 describe('Playing Track From Album Tests', function() {
   // Dream Your Life Away (Special Edition)
-  const albumId = "5S9b8euumqMhQbMk0zzQdH";
+  const albumId = '5S9b8euumqMhQbMk0zzQdH';
 
   // Wasted Time
-  const nextTrackId = "4hjJBjxN6IT0sDyTGlo5tA";
-  const nextTrackName = "Wasted Time";
-  const nextTrackDuration = 300973;
+  const nextTrackId = '4hjJBjxN6IT0sDyTGlo5tA';
+  const nextTrackName = 'Wasted Time';
+  const nextTrackDuration = 301000;
 
-  before(function() {
+  // Winds Of Change
+  const previousTrackId = '7JXxssBpAnroZOMR4vpOuc';
+  const previousTrackName = 'Winds Of Change';
+  const previousTrackDuration = 136000;
+
+  beforeEach(function() {
     return SpotifyApplicationClient.playTrackFromAlbum(trackId, albumId);
   });
 
@@ -205,7 +215,7 @@ describe('Playing Track From Album Tests', function() {
 
   it('should play previous track', function() {
     return SpotifyApplicationClient.playPreviousTrack().then( () => {
-      return checkTrackState(expectedTrackName, expectedAlbumName, expectedArtistName,
-                    expectedTrackDurationInMilliseconds)});
+      return checkTrackState(previousTrackName, expectedAlbumName, expectedArtistName,
+                    previousTrackDuration)});
   });
 });

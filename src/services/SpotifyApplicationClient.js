@@ -50,7 +50,7 @@ export default class SpotifyApplicationClient {
                           artistName: artistName,
                           trackDurationInMilliseconds: trackDurationInMilliseconds
                         });
-                      }).catch(e => console.error(e));
+                      });
   }
 
   static getPlayerState() {
@@ -111,7 +111,7 @@ export default class SpotifyApplicationClient {
                           isRepeating: isRepeating,
                           isSpotifyRunning: isSpotifyRunning
                         });
-                      }).catch(e => console.error(e));
+                      });
   }
 
   static toggleShuffle() {
