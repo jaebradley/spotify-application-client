@@ -26,7 +26,7 @@ const checkTrackState = function(trackName, albumName, artistName, trackDuration
     name: trackName,
     albumName: albumName,
     artistName: artistName,
-    trackDurationInMilliseconds: trackDuration
+    durationInMilliseconds: trackDuration
   });
   return SpotifyApplicationClient.getTrackDetails()
     .then(details => {
@@ -66,7 +66,7 @@ describe('Track Details Tests', function() {
       name: expectedTrackName,
       albumName: expectedAlbumName,
       artistName: expectedArtistName,
-      trackDurationInMilliseconds: expectedTrackDurationInMilliseconds
+      durationInMilliseconds: expectedTrackDurationInMilliseconds
     });
     return SpotifyApplicationClient.getTrackDetails()
       .should.become(expectedTrackDetails);

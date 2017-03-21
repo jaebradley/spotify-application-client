@@ -48,7 +48,7 @@ export default class SpotifyApplicationClient {
                           name: trackName,
                           albumName: albumName,
                           artistName: artistName,
-                          trackDurationInMilliseconds: trackDurationInMilliseconds
+                          durationInMilliseconds: trackDurationInMilliseconds
                         });
                       });
   }
