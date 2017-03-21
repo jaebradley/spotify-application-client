@@ -3,9 +3,9 @@
 import { Record } from 'immutable';
 
 const defaults = {
-  name: "",
-  albumName: "",
-  artistName: "",
+  name: '',
+  albumName: '',
+  artistName: '',
   durationInMilliseconds: 0
 };
 

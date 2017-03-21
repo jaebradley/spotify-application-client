@@ -43,8 +43,8 @@ export default class SpotifyApplicationClient {
                         SpotifyApplicationClient.getAlbumName(),
                         SpotifyApplicationClient.getArtistName(),
                         SpotifyApplicationClient.getTrackDurationInMilliseconds()
-                      ]).then((trackName, albumName, artistName, trackDurationInMilliseconds) => {
-                        new TrackDetails({
+                      ]).then( ([trackName, albumName, artistName, trackDurationInMilliseconds]) => {
+                        return new TrackDetails({
                           name: trackName,
                           albumName: albumName,
                           artistName: artistName,
@@ -103,7 +103,7 @@ export default class SpotifyApplicationClient {
                         SpotifyApplicationClient.isShuffling(),
                         SpotifyApplicationClient.isRepeating(),
                         SpotifyApplicationClient.isSpotifyRunning()
-                      ]).then((playerState, playerPositionInSeconds, isShuffling, isRepeating, isSpotifyRunning) => {
+                      ]).then( ([playerState, playerPositionInSeconds, isShuffling, isRepeating, isSpotifyRunning]) => {
                         return new PlayerDetails({
                           state: playerState,
                           positionInSeconds: playerPositionInSeconds,
