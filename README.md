@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/jaebradley/spotify-application-client.svg?branch=master)](https://travis-ci.org/jaebradley/spotify-application-client)
+[![npm version](https://badge.fury.io/js/spotify-application-client.svg)](https://badge.fury.io/js/spotify-application-client)
 
 # Spotify Application Client for MacOS
 Node Client for the Spotify App on Mac OS
