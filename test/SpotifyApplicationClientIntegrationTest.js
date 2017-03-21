@@ -66,7 +66,7 @@ describe('Track Details Tests', function() {
       name: expectedTrackName,
       albumName: expectedAlbumName,
       artistName: expectedArtistName,
-      trackDurationInMilliseconds: expectedTrackDurationInMilliseconds
+      durationInMilliseconds: expectedTrackDurationInMilliseconds
     });
     return SpotifyApplicationClient.getTrackDetails()
       .should.become(expectedTrackDetails);
