@@ -60,6 +60,24 @@ export default class SpotifyApplicationClientLinux {
     })
   }
 
+  static playNextTrack() {
+    return mpris.invoke("org.mpris.MediaPlayer2.Player", "Next").then(() => {
+      //Allow data to be refreshed
+      return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), 500)
+      })
+    })
+  }
+
+  static playPreviousTrack() {
+    return mpris.invoke("org.mpris.MediaPlayer2.Player", "Previous").then(() => {
+      //Allow data to be refreshed
+      return new Promise((resolve, reject) => {
+        setTimeout(() => resolve(), 500)
+      })
+    })
+  }
+
   static togglePlayPause() {
     return mpris.invoke("org.mpris.MediaPlayer2.Player", "PlayPause").then(() => {
       //Allow data to be refreshed
