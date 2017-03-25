@@ -7,10 +7,12 @@ chai.use(chaiAsPromised);
 chai.use(chaiImmutable);
 chai.should();
 
-import SpotifyApplicationClient from '../src/services/SpotifyApplicationClient';
+import SpotifyApplicationClientMacOS from '../src/services/SpotifyApplicationClientMacOS';
+
 import PlayerState from '../src/data/PlayerState';
 import PlayerDetails from '../src/data/PlayerDetails';
 import TrackDetails from '../src/data/TrackDetails';
+
 
 // INTEGRATION TEST TO BE RUN LOCALLY
 // Mess is Mine by Vance Joy from Dream Your Life Away (Special Edition)
@@ -28,14 +30,14 @@ const checkTrackState = function(trackName, albumName, artistName, trackDuration
     artistName: artistName,
     durationInMilliseconds: trackDuration
   });
-  return SpotifyApplicationClient.getTrackDetails()
+  return SpotifyApplicationClientMacOS.getTrackDetails()
     .then(details => {
       details.should.eql(expected);
     });
 };
 
 const checkPlayerState = function(playerState, isRepeating, isShuffling) {
-  return SpotifyApplicationClient.getPlayerDetails()
+  return SpotifyApplicationClientMacOS.getPlayerDetails()
     .then(details => {
       details.state.should.eql(playerState);
       details.isShuffling.should.eql(isShuffling);
@@ -44,18 +46,18 @@ const checkPlayerState = function(playerState, isRepeating, isShuffling) {
 };
 
 before(function() {
-  return SpotifyApplicationClient.activateApplication();
+  return SpotifyApplicationClientMacOS.activateApplication();
 });
 
 describe('Spotify Application Activation Test', function() {
   it('should check if Spotify Application is running', function() {
-    return SpotifyApplicationClient.isSpotifyRunning().should.become(true);
+    return SpotifyApplicationClientMacOS.isSpotifyRunning().should.become(true);
   });
 });
 
 describe('Track Details Tests', function() {
   it('should play track', function() {
-    return SpotifyApplicationClient.playTrack(trackId)
+    return SpotifyApplicationClientMacOS.playTrack(trackId)
       .then( () => checkTrackState(expectedTrackName, expectedAlbumName,
                                    expectedArtistName,
                                    expectedTrackDurationInMilliseconds));
@@ -68,31 +70,31 @@ describe('Track Details Tests', function() {
       artistName: expectedArtistName,
       durationInMilliseconds: expectedTrackDurationInMilliseconds
     });
-    return SpotifyApplicationClient.getTrackDetails()
+    return SpotifyApplicationClientMacOS.getTrackDetails()
       .should.become(expectedTrackDetails);
   });
 });
 
 describe('Player Details Tests', function() {
   before(function() {
-    return SpotifyApplicationClient.playTrack(trackId);
+    return SpotifyApplicationClientMacOS.playTrack(trackId);
   });
 
   it('should get player state', function() {
-    return SpotifyApplicationClient.getPlayerState()
+    return SpotifyApplicationClientMacOS.getPlayerState()
       .should.become(PlayerState.PLAYING);
   });
 
   it('should get repeating state', function() {
-    return SpotifyApplicationClient.isRepeating().should.become(false);
+    return SpotifyApplicationClientMacOS.isRepeating().should.become(false);
   });
 
   it('should get shuffling state', function() {
-    return SpotifyApplicationClient.isShuffling().should.become(false);
+    return SpotifyApplicationClientMacOS.isShuffling().should.become(false);
   });
 
   it('should get player details', function() {
-    const playerDetails = SpotifyApplicationClient.getPlayerDetails()
+    const playerDetails = SpotifyApplicationClientMacOS.getPlayerDetails()
       .then(details =>
         {
           details.state.should.become(initialPlayerState);
@@ -107,35 +109,35 @@ describe('Player Details Tests', function() {
 
 describe('Player State Change Tests', function() {
   before(function() {
-    return SpotifyApplicationClient.playTrack(trackId);
+    return SpotifyApplicationClientMacOS.playTrack(trackId);
   });
 
   const initialRepeatingState = false;
   const initialShufflingState = false;
 
   it('should pause', function() {
-    return SpotifyApplicationClient.pause()
+    return SpotifyApplicationClientMacOS.pause()
       .then( () => checkPlayerState(PlayerState.PAUSED,
                                     initialRepeatingState,
                                     initialShufflingState));
   });
 
   it('should play', function() {
-    return SpotifyApplicationClient.play()
+    return SpotifyApplicationClientMacOS.play()
       .then( () => checkPlayerState(PlayerState.PLAYING,
                                     initialRepeatingState,
                                     initialShufflingState));
   });
 
   it('should toggle play/pause', function() {
-    return SpotifyApplicationClient.togglePlayPause()
+    return SpotifyApplicationClientMacOS.togglePlayPause()
       .then(state => checkPlayerState(PlayerState.PAUSED,
                                       initialRepeatingState,
                                       initialShufflingState));
   });
 
   it('should toggle play/pause again', function() {
-    return SpotifyApplicationClient.togglePlayPause()
+    return SpotifyApplicationClientMacOS.togglePlayPause()
       .then(state => checkPlayerState(PlayerState.PLAYING,
                                       initialRepeatingState,
                                       initialShufflingState));
@@ -144,7 +146,7 @@ describe('Player State Change Tests', function() {
 
 describe('Repeating State Change Tests', function() {
   before(function() {
-    return SpotifyApplicationClient.playTrack(trackId);
+    return SpotifyApplicationClientMacOS.playTrack(trackId);
   });
 
   const initialPlayerState = PlayerState.PLAYING;
@@ -152,28 +154,28 @@ describe('Repeating State Change Tests', function() {
   const initialShufflingState = false;
 
   it('should turn on repeat', function() {
-    return SpotifyApplicationClient.turnOnRepeat()
+    return SpotifyApplicationClientMacOS.turnOnRepeat()
       .then(state => checkPlayerState(initialPlayerState,
                                       true,
                                       initialShufflingState));
   });
 
   it('should turn off repeat', function() {
-    return SpotifyApplicationClient.turnOffRepeat()
+    return SpotifyApplicationClientMacOS.turnOffRepeat()
       .then(state => checkPlayerState(initialPlayerState,
                                       false,
                                       initialShufflingState));
   });
 
   it('should toggle repeat', function() {
-    return SpotifyApplicationClient.toggleRepeat()
+    return SpotifyApplicationClientMacOS.toggleRepeat()
       .then(state => checkPlayerState(initialPlayerState,
                                       true,
                                       initialShufflingState));
   });
 
   it('should toggle repeat', function() {
-    return SpotifyApplicationClient.toggleRepeat()
+    return SpotifyApplicationClientMacOS.toggleRepeat()
       .then(state => checkPlayerState(initialPlayerState,
                                       false,
                                       initialShufflingState));
@@ -182,35 +184,35 @@ describe('Repeating State Change Tests', function() {
 
 describe('Shuffling State Change Tests', function() {
   before(function() {
-    return SpotifyApplicationClient.playTrack(trackId);
+    return SpotifyApplicationClientMacOS.playTrack(trackId);
   });
 
   const initialPlayerState = PlayerState.PLAYING;
   const initialRepeatingState = false;
 
   it('should turn on shuffle', function() {
-    return SpotifyApplicationClient.turnOnShuffle()
+    return SpotifyApplicationClientMacOS.turnOnShuffle()
       .then(state => checkPlayerState(initialPlayerState,
                                       initialRepeatingState,
                                       true));
   });
 
   it('should turn off shuffle', function() {
-    return SpotifyApplicationClient.turnOffShuffle()
+    return SpotifyApplicationClientMacOS.turnOffShuffle()
       .then(state => checkPlayerState(initialPlayerState,
                                       initialRepeatingState,
                                       false));
   });
 
   it('should toggle shuffle', function() {
-    return SpotifyApplicationClient.toggleShuffle()
+    return SpotifyApplicationClientMacOS.toggleShuffle()
       .then(state => checkPlayerState(initialPlayerState,
                                       initialRepeatingState,
                                       true));
   });
 
   it('should toggle shuffle', function() {
-    return SpotifyApplicationClient.toggleShuffle()
+    return SpotifyApplicationClientMacOS.toggleShuffle()
       .then(state => checkPlayerState(initialPlayerState,
                                       initialRepeatingState,
                                       false));
@@ -232,11 +234,11 @@ describe('Playing Track From Album Tests', function() {
   const previousTrackDuration = 136000;
 
   beforeEach(function() {
-    return SpotifyApplicationClient.playTrackFromAlbum(trackId, albumId);
+    return SpotifyApplicationClientMacOS.playTrackFromAlbum(trackId, albumId);
   });
 
   it('should play next track', function() {
-    return SpotifyApplicationClient.playNextTrack()
+    return SpotifyApplicationClientMacOS.playNextTrack()
       .then( () =>
         {
           return checkTrackState(nextTrackName,
@@ -248,7 +250,7 @@ describe('Playing Track From Album Tests', function() {
   });
 
   it('should play previous track', function() {
-    return SpotifyApplicationClient.playPreviousTrack()
+    return SpotifyApplicationClientMacOS.playPreviousTrack()
       .then( () =>
         {
           return checkTrackState(previousTrackName,

@@ -12,7 +12,14 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 ### Install
 `npm install spotify-application-client`
 
+### Usage
+```
+import SpotifyApplicationClientFactory from 'SpotifyApplicationClient';
+const SpotifyApplicationClient = SpotifyApplicationClientFactory.get()
+```
+
 ### API
+
 * [`isSpotifyRunning`](https://github.com/jaebradley/spotify-application-client#isspotifyrunning)
 * [`getTrackName`](https://github.com/jaebradley/spotify-application-client#gettrackname)
 * [`getAlbumName`](https://github.com/jaebradley/spotify-application-client#getalbumname)
@@ -61,6 +68,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `getPlayerPositionInSeconds`
 * Fetch the Spotify application player position, in seconds
 * Returns a `Promise` containing a `Float` that describes the player's position, in seconds
+* **Returns `undefined` on Linux**
 
 #### `getTrackDurationInMilliseconds`
 * Fetch the current track duration, in milliseconds
@@ -69,34 +77,42 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `turnOffRepeat`
 * Turn off the repeat state
 * Returns a `Promise` containing `null` if the state change is successful
+* **Doesn't change anything on Linux**
 
 #### `turnOnRepeat`
 * Turn on the repeat state
 * Returns a `Promise` containing `null` if the state change is successful
+* **Doesn't change anything on Linux**
 
 #### `isRepeating`
 * Check if the repeat state is on
 * Returns a `Promise` containing a `Boolean`
+* **Returns `undefined` on Linux**
 
 #### `toggleRepeat`
 * Flips the repeat state; if repeat is turned on, turn it off and if its turned off, turn it on
 * Returns a `Promise` containing `null` if the state change is successful
+* **Doesn't change anything on Linux**
 
 #### `turnOffShuffle`
 * Turn off the shuffle state
 * Returns a `Promise` containing `null` if the state change is successful
+* **Doesn't change anything on Linux**
 
 #### `turnOnShuffle`
 * Turns on the shuffle state
 * Returns a `Promise` containing `null` if the state change is successful
+* **Doesn't change anything on Linux**
 
 #### `isShuffling`
 * Check if the shuffle state is on
 * Returns a `Promise` containing a `Boolean`
+* **Returns `undefined` on Linux**
 
 #### `toggleShuffle`
 * Flips the shuffle state; if shuffle is turned on, turn it off and if its turned off, turn it on
 * Returns a `Promise` containing `null` if the state change is successful
+* **Doesn't change anything on Linux**
 
 #### `togglePlayPause`
 * Change the player state between `PLAYING` and `PAUSED`; if the player is `PLAYING`, then it will be `PAUSED`, and if its `PAUSED`, then it will be `PLAYING`.
@@ -125,6 +141,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `playTrackFromAlbum(trackId, albumId)`
 * Plays a track from an album with a given `trackId` and `albumId`
 * Returns a `Promise` containing `null` if the state change is successful
+* **On Linux it's an alias to `playTrack(trackId)`**
 
 #### `getTrackDetails`
 * Fetches details about the current track
@@ -144,3 +161,4 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
   * `isShuffling`: a `Boolean` representing the player's shuffle state
   * `isRepeating`: a `Boolean` representing the player's repeat state
   * `isSpotifyRunning`: a `Boolean` representing if the Spotify application is active
+* **On Linux `positionInSeconds`, `isShuffling` and `isRepeating` are undefined**

@@ -13,7 +13,7 @@ import { IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, GET_TRACK_NAME, PLAY_TRACK,
          TURN_ON_SHUFFLE, TOGGLE_PLAY_PAUSE, PLAY, PAUSE, PLAY_NEXT_TRACK,
          PLAY_PREVIOUS_TRACK, PLAY_TRACK_FROM_ALBUM } from '../data/SpotifyCommands';
 
-export default class SpotifyApplicationClient {
+export default class SpotifyApplicationClientMacOS {
   static isSpotifyRunning() {
     return CommandExecutor.execute(IS_SPOTIFY_RUNNING);
   }
@@ -39,10 +39,10 @@ export default class SpotifyApplicationClient {
   }
 
   static getTrackDetails() {
-    return Promise.all([SpotifyApplicationClient.getTrackName(),
-                        SpotifyApplicationClient.getAlbumName(),
-                        SpotifyApplicationClient.getArtistName(),
-                        SpotifyApplicationClient.getTrackDurationInMilliseconds()
+    return Promise.all([SpotifyApplicationClientMacOS.getTrackName(),
+                        SpotifyApplicationClientMacOS.getAlbumName(),
+                        SpotifyApplicationClientMacOS.getArtistName(),
+                        SpotifyApplicationClientMacOS.getTrackDurationInMilliseconds()
                       ]).then( ([trackName, albumName, artistName, trackDurationInMilliseconds]) => {
                         return new TrackDetails({
                           name: trackName,
@@ -75,13 +75,13 @@ export default class SpotifyApplicationClient {
   }
 
   static toggleRepeat() {
-    return SpotifyApplicationClient.isRepeating()
+    return SpotifyApplicationClientMacOS.isRepeating()
                                    .then(isRepeating => {
                                      if (isRepeating) {
-                                       return SpotifyApplicationClient.turnOffRepeat();
+                                       return SpotifyApplicationClientMacOS.turnOffRepeat();
                                      }
 
-                                     return SpotifyApplicationClient.turnOnRepeat();
+                                     return SpotifyApplicationClientMacOS.turnOnRepeat();
                                    });
   }
 
@@ -98,11 +98,11 @@ export default class SpotifyApplicationClient {
   }
 
   static getPlayerDetails() {
-    return Promise.all([SpotifyApplicationClient.getPlayerState(),
-                        SpotifyApplicationClient.getPlayerPositionInSeconds(),
-                        SpotifyApplicationClient.isShuffling(),
-                        SpotifyApplicationClient.isRepeating(),
-                        SpotifyApplicationClient.isSpotifyRunning()
+    return Promise.all([SpotifyApplicationClientMacOS.getPlayerState(),
+                        SpotifyApplicationClientMacOS.getPlayerPositionInSeconds(),
+                        SpotifyApplicationClientMacOS.isShuffling(),
+                        SpotifyApplicationClientMacOS.isRepeating(),
+                        SpotifyApplicationClientMacOS.isSpotifyRunning()
                       ]).then( ([playerState, playerPositionInSeconds, isShuffling, isRepeating, isSpotifyRunning]) => {
                         return new PlayerDetails({
                           state: playerState,
@@ -115,12 +115,12 @@ export default class SpotifyApplicationClient {
   }
 
   static toggleShuffle() {
-    return SpotifyApplicationClient.isShuffling()
+    return SpotifyApplicationClientMacOS.isShuffling()
                                    .then(isShuffling => {
                                      if (isShuffling) {
-                                       return SpotifyApplicationClient.turnOffShuffle();
+                                       return SpotifyApplicationClientMacOS.turnOffShuffle();
                                      }
-                                     return SpotifyApplicationClient.turnOnShuffle();
+                                     return SpotifyApplicationClientMacOS.turnOnShuffle();
                                    });
   }
 
