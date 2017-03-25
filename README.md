@@ -1,13 +1,13 @@
 [![Build Status](https://travis-ci.org/jaebradley/spotify-application-client.svg?branch=master)](https://travis-ci.org/jaebradley/spotify-application-client)
 [![npm version](https://badge.fury.io/js/spotify-application-client.svg)](https://badge.fury.io/js/spotify-application-client)
 
-# Spotify Application Client for MacOS
-Node Client for the Spotify App on Mac OS
+# Spotify Application Client for MacOS and Linux
+Node Client for the Spotify App on Mac OS and Linux
 
 ## Overview
-Spotify built an [AppleScript API](https://developer.spotify.com/applescript-api/) that enables programmatic control of the player (on Mac OS).
+Spotify built an [AppleScript](https://developer.spotify.com/applescript-api/) (on Mac OS) and on [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/) (on Linux) that enables programmatic control of the player.
 
-This client sits on top of this AppleScript API to provide a simple abstraction layer.
+This client sits on top of this AppleScript and MPRIS APIs to provide a simple abstraction layer.
 
 ### Install
 `npm install spotify-application-client`
