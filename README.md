@@ -68,7 +68,7 @@ const SpotifyApplicationClient = SpotifyApplicationClientFactory.get()
 #### `getPlayerPositionInSeconds`
 * Fetch the Spotify application player position, in seconds
 * Returns a `Promise` containing a `Float` that describes the player's position, in seconds
-* **Returns `undefined` on Linux**
+* **Promise always contains `undefined` on Linux**
 
 #### `getTrackDurationInMilliseconds`
 * Fetch the current track duration, in milliseconds
@@ -87,7 +87,7 @@ const SpotifyApplicationClient = SpotifyApplicationClientFactory.get()
 #### `isRepeating`
 * Check if the repeat state is on
 * Returns a `Promise` containing a `Boolean`
-* **Returns `undefined` on Linux**
+* **Promise always contains `undefined` on Linux**
 
 #### `toggleRepeat`
 * Flips the repeat state; if repeat is turned on, turn it off and if its turned off, turn it on
@@ -107,7 +107,7 @@ const SpotifyApplicationClient = SpotifyApplicationClientFactory.get()
 #### `isShuffling`
 * Check if the shuffle state is on
 * Returns a `Promise` containing a `Boolean`
-* **Returns `undefined` on Linux**
+* **Promise always contains `undefined` on Linux**
 
 #### `toggleShuffle`
 * Flips the shuffle state; if shuffle is turned on, turn it off and if its turned off, turn it on
