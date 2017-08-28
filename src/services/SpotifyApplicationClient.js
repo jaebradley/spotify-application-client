@@ -14,15 +14,18 @@ import { GET_TRACK_ID, IS_SPOTIFY_RUNNING, ACTIVATE_APPLICATION, GET_TRACK_NAME,
          PLAY_PREVIOUS_TRACK, PLAY_TRACK_FROM_ALBUM } from '../data/SpotifyCommands';
 
 export default class SpotifyApplicationClient {
-  static getTrackId() {
-    return CommandExecuter.execute(GET_TRACK_ID)
-  }
   static isSpotifyRunning() {
     return CommandExecutor.execute(IS_SPOTIFY_RUNNING);
   }
 
   static activateApplication() {
     return CommandExecutor.execute(ACTIVATE_APPLICATION);
+  }
+
+  static getTrackId() {
+    // Track Ids are returned formatted like `spotify:track:{someTrackId}`
+    // This simply returns `someTrackId`
+    return CommandExecutor.execute(GET_TRACK_ID).then(trackId => trackId.split(/spotify:track:/).pop())
   }
 
   static getTrackName() {
