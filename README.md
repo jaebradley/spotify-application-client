@@ -14,6 +14,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 
 ### API
 * [`isSpotifyRunning`](https://github.com/jaebradley/spotify-application-client#isspotifyrunning)
+* [`getTrackId`](https://github.com/jaebradley/spotify-application-client#gettrackid)
 * [`getTrackName`](https://github.com/jaebradley/spotify-application-client#gettrackname)
 * [`getAlbumName`](https://github.com/jaebradley/spotify-application-client#getalbumname)
 * [`getArtistName`](https://github.com/jaebradley/spotify-application-client#getartistname)
@@ -40,6 +41,9 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `isSpotifyRunning`
 * Check to see if the Spotify application is running
 * Returns a `Promise` containing a `Boolean`
+
+#### `getTrackId`
+* Returns a `Promise` containing [the `Base-62` identifier for the current song](https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids)
 
 #### `getTrackName`
 * Fetch the current track name
@@ -129,7 +133,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `getTrackDetails`
 * Fetches details about the current track
 * Returns a `Promise` containing a [`TrackDetails`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/TrackDetails.js) object.
-* The `TrackDetails` object has the following fields:
+* The [`TrackDetails`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/TrackDetails.js) object has the following fields:
   * `name`: the track name
   * `albumName`: the track's album name
   * `artistName`: the track's artist's name
@@ -138,8 +142,8 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `getPlayerDetails`
 * Fetches details about the player
 * Returns a `Promise` a containing a [`PlayerDetails`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/PlayerDetails.js) object
-* The `PlayerDetails` object has the following fields:
-  * `state`: a `PlayerState` object (`PLAYING`, `PAUSED`, `STOPPED`)
+* The [`PlayerDetails`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/PlayerDetails.js) object has the following fields:
+  * `state`: a [`PlayerState`](https://github.com/jaebradley/spotify-application-client/blob/master/src/data/PlayerState.js) object (`PLAYING`, `PAUSED`, `STOPPED`)
   * `positionInSeconds`: the player's position, in seconds
   * `isShuffling`: a `Boolean` representing the player's shuffle state
   * `isRepeating`: a `Boolean` representing the player's repeat state
