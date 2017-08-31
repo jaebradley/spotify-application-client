@@ -71,6 +71,10 @@ describe('Track Details Tests', function() {
     return SpotifyApplicationClient.getTrackDetails()
       .should.become(expectedTrackDetails);
   });
+
+  it('should get track id', () => {
+    return SpotifyApplicationClient.getTrackId().should.become(trackId);
+  });
 });
 
 describe('Player Details Tests', function() {
