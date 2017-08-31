@@ -14,6 +14,7 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 
 ### API
 * [`isSpotifyRunning`](https://github.com/jaebradley/spotify-application-client#isspotifyrunning)
+* [`getTrackId`](https://github.com/jaebradley/spotify-application-client#gettrackid)
 * [`getTrackName`](https://github.com/jaebradley/spotify-application-client#gettrackname)
 * [`getAlbumName`](https://github.com/jaebradley/spotify-application-client#getalbumname)
 * [`getArtistName`](https://github.com/jaebradley/spotify-application-client#getartistname)
@@ -40,6 +41,9 @@ This client sits on top of this AppleScript API to provide a simple abstraction 
 #### `isSpotifyRunning`
 * Check to see if the Spotify application is running
 * Returns a `Promise` containing a `Boolean`
+
+#### `getTrackId`
+* Returns a `Promise` containing [the `Base-62` identifier for the current song](https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids)
 
 #### `getTrackName`
 * Fetch the current track name
